@@ -18,12 +18,51 @@ import (
 	"flag"
 	"net/http"
 	"os"
-	"runtime"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/alexsasharegan/dotenv"
 	"github.com/prometheus/client_golang/prometheus"
+)
+
+// Global vars for metrics
+var (
+	streamViewers = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "lmhd",
+			Subsystem: "twitch",
+			Name:      "stream_viewers",
+			Help:      "Number of viewers of a stream",
+		},
+		[]string{
+			// Which twitch channel?
+			"channel",
+		},
+	)
+	channelFollowers = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "lmhd",
+			Subsystem: "twitch",
+			Name:      "channel_followers",
+			Help:      "Number of followers of a channel",
+		},
+		[]string{
+			// Which twitch channel?
+			"channel",
+		},
+	)
+	channelViews = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "lmhd",
+			Subsystem: "twitch",
+			Name:      "channel_views",
+			Help:      "Number of views of a channel",
+		},
+		[]string{
+			// Which twitch channel?
+			"channel",
+		},
+	)
 )
 
 var addr = flag.String("listen-address", ":8080", "The address to listen on for HTTP requests.")
@@ -59,72 +98,61 @@ func main() {
 	log.Infof("Hello World")
 
 	//
-	// Simple Gauge Example
-	//
-
-	gauge := prometheus.NewGauge(prometheus.GaugeOpts{
-		Namespace: "lmhd",
-		Subsystem: "twitch",
-		Name:      "gauge",
-		Help:      "Testing a simple gauge",
-	})
-	prometheus.MustRegister(gauge)
-
-	//
-	// Simple GaugeFunc Example
-	//
-
-	if err := prometheus.Register(prometheus.NewGaugeFunc(
-		prometheus.GaugeOpts{
-			Namespace: "lmhd",
-			Subsystem: "twitch",
-			Name:      "gauge_func",
-			Help:      "Number of goroutines that currently exist.",
-		},
-		func() float64 { return float64(runtime.NumGoroutine()) },
-	)); err == nil {
-		log.Debugf("GaugeFunc 'goroutines_count' registered.")
-	}
-
-	//
 	// SimpleGaugeVec Example
 	//
 
-	opsQueued := prometheus.NewGaugeVec(
-		prometheus.GaugeOpts{
-			Namespace: "lmhd",
-			Subsystem: "twitch",
-			Name:      "gauge_vec",
-			Help:      "Number of blob storage operations waiting to be processed, partitioned by user and type.",
-		},
-		[]string{
-			// Which user has requested the operation?
-			"user",
-			// Of what type is the operation?
-			"type",
-		},
-	)
-	prometheus.MustRegister(opsQueued)
+	prometheus.MustRegister(streamViewers)
+	prometheus.MustRegister(channelFollowers)
+	prometheus.MustRegister(channelViews)
 
 	//
 	// Loops
 	//
 
-	go handler()
+	go metricsHandler()
+
+	metricsUpdate()
+}
+
+func metricsHandler() {
+
+	flag.Parse()
+	http.Handle("/metrics", prometheus.Handler())
+	log.Fatal(http.ListenAndServe(*addr, nil))
+}
+
+func metricsUpdate() {
 
 	// Loop to update gauges
 	// Ideally this would just be a GaugeVecFunc, but that doesn't exist
 	for {
 		log.Debugf("Querying...")
-		gauge.Set(3)
-		opsQueued.With(prometheus.Labels{"type": "delete", "user": "alice"}).Inc()
-		time.Sleep(10 * time.Second)
+
+		// TODO: start of loop, take a set of channel names, get ids
+
+		// Channel names to IDs
+		channels := map[string]string{
+			"seraphimkimiko": "182561942",
+			"nintendo":       "37319",
+			"twitch":         "12826",
+		}
+
+		for name, id := range channels {
+			streamData, err := KrakenStreamsRequest(id)
+
+			if err != nil {
+				log.Errorf("Error: %s", err)
+			} else {
+				streamViewers.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Viewers))
+				channelFollowers.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Channel.Followers))
+				channelViews.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Channel.Views))
+				// TODO: more metrics
+			}
+		}
+
+		log.Debugf("Sleeping")
+
+		// TODO: Calculate rate limit (30 reqs per second)
+		time.Sleep(30 * time.Second)
 	}
-}
-
-func handler() {
-
-	flag.Parse()
-	http.Handle("/metrics", prometheus.Handler())
-	log.Fatal(http.ListenAndServe(*addr, nil))
 }
