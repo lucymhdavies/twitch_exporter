@@ -3,9 +3,9 @@ version: '3.1'
 volumes:
     prometheus_data: {}
 
-#networks:
+networks:
 #  front-tier:
-#  back-tier:
+  back-tier:
 
 services:
 
@@ -21,6 +21,13 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
       - 9090:9090
-#    networks:
-#      - back-tier
+    networks:
+      - back-tier
     restart: always
+
+  my_metrics:
+    build: .
+    ports:
+      - 8080:8080
+    networks:
+      - back-tier
