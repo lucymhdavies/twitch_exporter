@@ -17,18 +17,114 @@ package main
 import (
 	"flag"
 	"net/http"
+	"os"
+	"runtime"
+	"time"
 
 	log "github.com/Sirupsen/logrus"
-
-	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/alexsasharegan/dotenv"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 var addr = flag.String("listen-address", ":8080", "The address to listen on for HTTP requests.")
 
+type Config struct {
+	LogLevel string
+}
+
+var cfg Config
+
 func main() {
+	// Load env vars from .env file, if present
+	// Ignore errors caused by file not existing
+	_ = dotenv.Load()
+
+	// Setup logging before anything else
+	if len(os.Getenv("LOG_LEVEL")) == 0 {
+		cfg.LogLevel = "info"
+	} else {
+		cfg.LogLevel = os.Getenv("LOG_LEVEL")
+	}
+	switch cfg.LogLevel {
+	case "info":
+		log.SetLevel(log.InfoLevel)
+	case "debug":
+		log.SetLevel(log.DebugLevel)
+	case "warn":
+		log.SetLevel(log.WarnLevel)
+	case "error":
+		log.SetLevel(log.ErrorLevel)
+	}
+
 	log.Infof("Hello World")
 
+	//
+	// Simple Gauge Example
+	//
+
+	gauge := prometheus.NewGauge(prometheus.GaugeOpts{
+		Namespace: "lmhd",
+		Subsystem: "twitch",
+		Name:      "gauge",
+		Help:      "Testing a simple gauge",
+	})
+	prometheus.MustRegister(gauge)
+
+	//
+	// Simple GaugeFunc Example
+	//
+
+	if err := prometheus.Register(prometheus.NewGaugeFunc(
+		prometheus.GaugeOpts{
+			Namespace: "lmhd",
+			Subsystem: "twitch",
+			Name:      "gauge_func",
+			Help:      "Number of goroutines that currently exist.",
+		},
+		func() float64 { return float64(runtime.NumGoroutine()) },
+	)); err == nil {
+		log.Debugf("GaugeFunc 'goroutines_count' registered.")
+	}
+
+	//
+	// SimpleGaugeVec Example
+	//
+
+	opsQueued := prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "lmhd",
+			Subsystem: "twitch",
+			Name:      "gauge_vec",
+			Help:      "Number of blob storage operations waiting to be processed, partitioned by user and type.",
+		},
+		[]string{
+			// Which user has requested the operation?
+			"user",
+			// Of what type is the operation?
+			"type",
+		},
+	)
+	prometheus.MustRegister(opsQueued)
+
+	//
+	// Loops
+	//
+
+	go handler()
+
+	// Loop to update gauges
+	// Ideally this would just be a GaugeVecFunc, but that doesn't exist
+	for {
+		log.Debugf("Querying...")
+		gauge.Set(3)
+		opsQueued.With(prometheus.Labels{"type": "delete", "user": "alice"}).Inc()
+		time.Sleep(10 * time.Second)
+	}
+}
+
+func handler() {
+
 	flag.Parse()
-	http.Handle("/metrics", promhttp.Handler())
+	http.Handle("/metrics", prometheus.Handler())
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
