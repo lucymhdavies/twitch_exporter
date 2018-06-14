@@ -92,6 +92,8 @@ func KrakenStreamsRequest(userId string) (KrakenStreamsResponse, error) {
 
 	response := KrakenStreamsResponse{}
 
+	// TODO: if stream isn't live, return nil or error
+
 	err = json.Unmarshal(body, &response)
 	if err != nil {
 		log.Errorf("ERR: %s", err)

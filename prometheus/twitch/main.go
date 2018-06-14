@@ -132,9 +132,16 @@ func metricsUpdate() {
 
 		// Channel names to IDs
 		channels := map[string]string{
-			"seraphimkimiko": "182561942",
-			"nintendo":       "37319",
-			"twitch":         "12826",
+			"seraphimkimiko":  "182561942",
+			"slytq":           "89854598",
+			"nintendo":        "37319",
+			"twitch":          "12826",
+			"yogscast":        "20786541",
+			"el_funko":        "28160719",
+			"nerdcubed":       "29660771",
+			"loadingreadyrun": "27132299",
+			"kate":            "73625408",
+			"bengineering":    "113481237",
 		}
 
 		for name, id := range channels {
@@ -142,11 +149,13 @@ func metricsUpdate() {
 
 			if err != nil {
 				log.Errorf("Error: %s", err)
+
+				// TODO: if not live, do something else
 			} else {
 				streamViewers.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Viewers))
 				channelFollowers.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Channel.Followers))
 				channelViews.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Channel.Views))
-				// TODO: more metrics
+				// TODO: more metrics!
 			}
 		}
 
