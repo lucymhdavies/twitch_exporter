@@ -39,6 +39,20 @@ var (
 			"channel",
 		},
 	)
+
+	streamFps = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "lmhd",
+			Subsystem: "twitch",
+			Name:      "stream_average_fps",
+			Help:      "Average FPS of a stream",
+		},
+		[]string{
+			// Which twitch channel?
+			"channel",
+		},
+	)
+
 	channelFollowers = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Namespace: "lmhd",
@@ -120,6 +134,8 @@ func main() {
 	//
 
 	prometheus.MustRegister(streamViewers)
+	prometheus.MustRegister(streamFps)
+
 	prometheus.MustRegister(channelFollowers)
 	prometheus.MustRegister(channelViews)
 
@@ -179,6 +195,7 @@ func metricsUpdate() {
 			name := stream.Channel.Name
 
 			streamViewers.With(prometheus.Labels{"channel": name}).Set(float64(stream.Viewers))
+			streamFps.With(prometheus.Labels{"channel": name}).Set(float64(stream.AverageFps))
 			channelFollowers.With(prometheus.Labels{"channel": name}).Set(float64(stream.Channel.Followers))
 			channelViews.With(prometheus.Labels{"channel": name}).Set(float64(stream.Channel.Views))
 
