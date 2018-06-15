@@ -35,3 +35,5 @@ services:
       - back-tier
     environment:
       LOG_LEVEL: debug
+      KRAKEN_CLIENT_ID: foo
+      TWITCH_CHANNELS: seraphimkimiko,slytq,ferociouslysteph,zoeyproasheck,bengineering,ohkay
