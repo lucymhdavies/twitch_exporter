@@ -25,11 +25,12 @@ Launch the exporter, as well as a prometheus instance with:
 docker-compose up
 ```
 
-Prometheus will be available on http://localhost:9090
+Prometheus will be available, on [http://localhost:9090](http://localhost:9090)
 
-For example, to view all live viewers:
+The docker-compose file also comes with Grafana, with a pre-configured dashboard, on [http://localhost:3000](http://localhost:3000)
 
-http://localhost:9090/graph?g0.range_input=30m&g0.expr=lmhd_twitch_stream_viewers&g0.tab=0
+![screenshot of Grafana dashboard](images/grafana.png)
+
 
 
 
