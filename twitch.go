@@ -62,6 +62,7 @@ type KrakenStreamsResponse struct {
 	} `json:"stream"`
 }
 
+// TODO: get this from env var
 var krakenClientId = "REDACTED"
 
 func KrakenStreamsRequest(userId string) (KrakenStreamsResponse, error) {

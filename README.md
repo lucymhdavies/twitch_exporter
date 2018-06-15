@@ -1,2 +1,3 @@
-# go-experiments
-Experimenting with Stuff. No guarantees that any of this works, or is even useful
+# Prometheus Exporter for the Twitch.tv API
+
+Proof of Concept
