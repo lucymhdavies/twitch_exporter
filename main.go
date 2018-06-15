@@ -206,8 +206,10 @@ func metricsUpdate() {
 		}
 
 		// For all channels we haven't seen, delete their live viewers
-		for _, name := range channelsUnseen {
+		for name := range channelsUnseen {
+			log.Debugf("Deleting metrics for unseen channel %s", name)
 			streamViewers.Delete(prometheus.Labels{"channel": name})
+			streamFps.Delete(prometheus.Labels{"channel": name})
 
 			// TODO: query API to get these for non-live channels
 			channelFollowers.Delete(prometheus.Labels{"channel": name})
