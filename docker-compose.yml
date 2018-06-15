@@ -34,6 +34,7 @@ services:
     networks:
       - back-tier
     environment:
-      LOG_LEVEL: debug
-      KRAKEN_CLIENT_ID: foo
-      TWITCH_CHANNELS: seraphimkimiko,slytq,ferociouslysteph,zoeyproasheck,bengineering,ohkay
+      # Values of these come from .env file
+      LOG_LEVEL:
+      KRAKEN_CLIENT_ID:
+      TWITCH_CHANNELS:

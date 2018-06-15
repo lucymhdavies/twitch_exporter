@@ -7,9 +7,11 @@ Proof of Concept, using (deprecated) v5 (Kraken) Twitch API
 
 ## Usage
 
+Copy `example.env` to `.env`, and modify as necessary
+
 ### Local
 
-Copy `example.env` to `.env`, and modify as necessary
+Run locally with:
 
 ```
 go run *.go
@@ -17,12 +19,17 @@ go run *.go
 
 ### Docker
 
-Modify `environment` section of `my_metrics` in `docker-compose.yml`.
-(see `example.env` for an explanation of each environment variable)
+Launch the exporter, as well as a prometheus instance with:
 
 ```
 docker-compose up
 ```
+
+Prometheus will be available on http://localhost:9090
+
+For example, to view all live viewers:
+
+http://localhost:9090/graph?g0.range_input=30m&g0.expr=lmhd_twitch_stream_viewers&g0.tab=0
 
 
 
