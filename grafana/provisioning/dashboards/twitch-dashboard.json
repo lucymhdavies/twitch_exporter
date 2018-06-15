@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1529105965371,
+  "iteration": 1529106186640,
   "links": [],
   "panels": [
     {
@@ -276,6 +276,7 @@
       }
     }
   ],
+  "refresh": "1m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -340,5 +341,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 8
+  "version": 9
 }
