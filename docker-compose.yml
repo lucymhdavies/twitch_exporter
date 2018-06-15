@@ -3,10 +3,11 @@ version: '3.1'
 # Based on https://github.com/vegasbrianc/prometheus
 
 volumes:
-    prometheus_data: {}
+  prometheus_data: {}
+  grafana_data: {}
 
 networks:
-#  front-tier:
+  front-tier:
   back-tier:
 
 services:
@@ -38,3 +39,19 @@ services:
       LOG_LEVEL:
       KRAKEN_CLIENT_ID:
       TWITCH_CHANNELS:
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - back-tier
+      - front-tier
+    restart: always
