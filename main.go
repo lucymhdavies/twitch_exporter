@@ -191,6 +191,8 @@ func metricsUpdate() {
 			log.Fatalf("%s", err)
 		}
 
+		log.Debugf("Updating metrics for %d live channels", len(krakenStreamsResponse.Streams))
+
 		for _, stream := range krakenStreamsResponse.Streams {
 			name := stream.Channel.Name
 
