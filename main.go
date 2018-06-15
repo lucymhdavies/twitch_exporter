@@ -18,7 +18,7 @@ import (
 	"flag"
 	"net/http"
 	"os"
-	"time"
+	"strings"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/alexsasharegan/dotenv"
@@ -68,10 +68,14 @@ var (
 var addr = flag.String("listen-address", ":8080", "The address to listen on for HTTP requests.")
 
 type Config struct {
-	LogLevel string
+	LogLevel       string
+	KrakenClientID string
+	Channels       []string
 }
 
 var cfg Config
+
+var kraken *KrakenClient
 
 func main() {
 	// Load env vars from .env file, if present
@@ -95,10 +99,24 @@ func main() {
 		log.SetLevel(log.ErrorLevel)
 	}
 
-	log.Infof("Hello World")
+	if len(os.Getenv("KRAKEN_CLIENT_ID")) == 0 {
+		log.Fatalf("KRAKEN_CLIENT_ID not set!")
+	}
+	cfg.KrakenClientID = os.Getenv("KRAKEN_CLIENT_ID")
+
+	if len(os.Getenv("TWITCH_CHANNELS")) == 0 {
+		log.Fatalf("TWITCH_CHANNELS not set!")
+	}
+	cfg.Channels = strings.Split(os.Getenv("TWITCH_CHANNELS"), ",")
 
 	//
-	// SimpleGaugeVec Example
+	// Twitch API Client
+	//
+
+	kraken = NewKrakenClient(cfg.KrakenClientID)
+
+	//
+	// Register Prometheus Metrics
 	//
 
 	prometheus.MustRegister(streamViewers)
@@ -123,45 +141,58 @@ func metricsHandler() {
 
 func metricsUpdate() {
 
+	krakenUsersResponse, err := kraken.Users(cfg.Channels)
+	if err != nil {
+		log.Fatalf("%s", err)
+	}
+
+	// map of IDs to Names
+	var channelIDs = make(map[string]string)
+	// slice of IDs
+	var channels []string
+
+	for _, user := range krakenUsersResponse.Users {
+		channelIDs[user.Name] = user.ID
+		channels = append(channels, user.ID)
+	}
+
+	log.Debugf("Channel IDs: %s", channelIDs)
+
 	// Loop to update gauges
-	// Ideally this would just be a GaugeVecFunc, but that doesn't exist
 	for {
-		log.Debugf("Querying...")
-
-		// TODO: start of loop, take a set of channel names, get ids
-
-		// Channel names to IDs
-		channels := map[string]string{
-			"seraphimkimiko":  "182561942",
-			"slytq":           "89854598",
-			"nintendo":        "37319",
-			"twitch":          "12826",
-			"yogscast":        "20786541",
-			"el_funko":        "28160719",
-			"nerdcubed":       "29660771",
-			"loadingreadyrun": "27132299",
-			"kate":            "73625408",
-			"bengineering":    "113481237",
+		// Keep track of which channels we've had updates for
+		// i.e. those which are live
+		channelsSeen := make(map[string]string)
+		// and those which are not
+		channelsUnseen := make(map[string]string)
+		for k, v := range channelIDs {
+			channelsUnseen[k] = v
 		}
 
-		for name, id := range channels {
-			streamData, err := KrakenStreamsRequest(id)
-
-			if err != nil {
-				log.Errorf("Error: %s", err)
-
-				// TODO: if not live, do something else
-			} else {
-				streamViewers.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Viewers))
-				channelFollowers.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Channel.Followers))
-				channelViews.With(prometheus.Labels{"channel": name}).Set(float64(streamData.Stream.Channel.Views))
-				// TODO: more metrics!
-			}
+		log.Debugf("Querying %d channels", len(channelIDs))
+		krakenStreamsResponse, err := kraken.Streams(channels)
+		if err != nil {
+			log.Fatalf("%s", err)
 		}
 
-		log.Debugf("Sleeping")
+		for _, stream := range krakenStreamsResponse.Streams {
+			name := stream.Channel.Name
 
-		// TODO: Calculate rate limit (30 reqs per second)
-		time.Sleep(30 * time.Second)
+			streamViewers.With(prometheus.Labels{"channel": name}).Set(float64(stream.Viewers))
+			channelFollowers.With(prometheus.Labels{"channel": name}).Set(float64(stream.Channel.Followers))
+			channelViews.With(prometheus.Labels{"channel": name}).Set(float64(stream.Channel.Views))
+
+			channelsSeen[name] = channelsUnseen[name]
+			delete(channelsUnseen, name)
+		}
+
+		// For all channels we haven't seen, delete their live viewers
+		for _, name := range channelsUnseen {
+			streamViewers.Delete(prometheus.Labels{"channel": name})
+
+			// TODO: query API to get these for non-live channels
+			channelFollowers.Delete(prometheus.Labels{"channel": name})
+			channelViews.Delete(prometheus.Labels{"channel": name})
+		}
 	}
 }

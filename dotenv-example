@@ -1,0 +1,16 @@
+# Dotenv
+# Edit this, and copy to .env
+
+# Log level. Options: debug, info, warn, error
+# Default:info
+LOG_LEVEL=debug
+
+# Twitch API Client ID
+# You can get one from https://glass.twitch.tv/console/apps
+KRAKEN_CLIENT_ID=foo
+
+# Which channels to monitor
+# Note that, due to Twitch API rate limiting, the more channels you monitor here, the more time between updates
+#
+# Here are some of my favourites
+TWITCH_CHANNELS=seraphimkimiko,slytq,ferociouslysteph,zoeyproasheck,bengineering,ohkay,
