@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1529108848763,
+  "iteration": 1529111818502,
   "links": [],
   "panels": [
     {
@@ -57,7 +57,7 @@
         "max": false,
         "min": false,
         "rightSide": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": true
       },
@@ -79,7 +79,7 @@
           "expr": "lmhd_twitch_stream_viewers{channel=~\"$channel\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "{{channel}}",
           "refId": "A"
         }
       ],
@@ -186,7 +186,7 @@
       "repeatDirection": "h",
       "scopedVars": {
         "channel": {
-          "$$hashKey": "object:384",
+          "$$hashKey": "object:857",
           "selected": true,
           "text": "seraphimkimiko",
           "value": "seraphimkimiko"
@@ -244,7 +244,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -266,6 +266,7 @@
           "expr": "lmhd_twitch_channel_views{channel=~\"$channel\"}",
           "format": "time_series",
           "intervalFactor": 1,
+          "legendFormat": "{{channel}}",
           "refId": "A"
         }
       ],
@@ -331,7 +332,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -353,6 +354,7 @@
           "expr": "lmhd_twitch_channel_followers{channel=~\"$channel\"}",
           "format": "time_series",
           "intervalFactor": 1,
+          "legendFormat": "{{channel}}",
           "refId": "A"
         }
       ],
@@ -432,7 +434,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -463,5 +465,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 17
+  "version": 21
 }
