@@ -16,14 +16,14 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1529108008177,
+  "iteration": 1529108848763,
   "links": [],
   "panels": [
     {
       "content": "![Combination of Prometheus logo and Kappa emote from Twitch](https://raw.githubusercontent.com/lucymhdavies/twitch_exporter/master/images/prometheus-kappa.png)",
       "gridPos": {
-        "h": 12,
-        "w": 6,
+        "h": 9,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -42,9 +42,9 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 12,
-        "w": 18,
-        "x": 6,
+        "h": 9,
+        "w": 20,
+        "x": 4,
         "y": 0
       },
       "id": 2,
@@ -57,7 +57,7 @@
         "max": false,
         "min": false,
         "rightSide": false,
-        "show": true,
+        "show": false,
         "total": false,
         "values": true
       },
@@ -72,7 +72,7 @@
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
-      "steppedLine": true,
+      "steppedLine": false,
       "targets": [
         {
           "$$hashKey": "object:303",
@@ -149,7 +149,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 9
       },
       "id": 10,
       "interval": null,
@@ -186,7 +186,7 @@
       "repeatDirection": "h",
       "scopedVars": {
         "channel": {
-          "$$hashKey": "object:2303",
+          "$$hashKey": "object:384",
           "selected": true,
           "text": "seraphimkimiko",
           "value": "seraphimkimiko"
@@ -236,7 +236,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 18
       },
       "id": 4,
       "legend": {
@@ -244,7 +244,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": true,
+        "show": false,
         "total": false,
         "values": false
       },
@@ -323,7 +323,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 18
       },
       "id": 6,
       "legend": {
@@ -331,7 +331,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": true,
+        "show": false,
         "total": false,
         "values": false
       },
@@ -463,5 +463,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 16
+  "version": 17
 }
