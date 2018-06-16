@@ -39,6 +39,7 @@ services:
       LOG_LEVEL:
       KRAKEN_CLIENT_ID:
       TWITCH_CHANNELS:
+    restart: always
 
   grafana:
     image: grafana/grafana
