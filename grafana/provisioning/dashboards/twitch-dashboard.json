@@ -16,9 +16,24 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1529106186640,
+  "iteration": 1529107515478,
   "links": [],
   "panels": [
+    {
+      "content": "![Combination of Prometheus logo and Kappa emote from Twitch](https://raw.githubusercontent.com/lucymhdavies/twitch_exporter/master/images/prometheus-kappa.png)",
+      "gridPos": {
+        "h": 12,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "links": [],
+      "mode": "markdown",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -27,9 +42,9 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 13,
-        "w": 24,
-        "x": 0,
+        "h": 12,
+        "w": 18,
+        "x": 6,
         "y": 0
       },
       "id": 2,
@@ -116,7 +131,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "id": 4,
       "legend": {
@@ -201,7 +216,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 13
+        "y": 12
       },
       "id": 6,
       "legend": {
@@ -310,7 +325,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -341,5 +356,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 9
+  "version": 11
 }
