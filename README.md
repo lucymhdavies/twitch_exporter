@@ -36,8 +36,10 @@ The docker-compose file also comes with Grafana, with a pre-configured dashboard
 
 ## TODO
 
-Migrate to the new (Helix) Twitch API
+- [ ] Migrate to the new (Helix) Twitch API
+  - Helix should already provide most, if not all, of the necessary functionality, so migrate to that at some point
+  - https://github.com/nicklaw5/helix
 
-Helix should already provide most, if not all, of the necessary functionality, so migrate to that at some point
+- [ ] Bundle prometheus and grafana configs up into docker images
 
-https://github.com/nicklaw5/helix
+- [ ] Run this somewhere. ECS?
