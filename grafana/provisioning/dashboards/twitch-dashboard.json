@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1529107515478,
+  "iteration": 1529108008177,
   "links": [],
   "panels": [
     {
@@ -49,13 +49,17 @@
       },
       "id": 2,
       "legend": {
-        "avg": false,
+        "alignAsTable": false,
+        "avg": true,
         "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": false,
         "min": false,
+        "rightSide": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -68,7 +72,7 @@
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
-      "steppedLine": false,
+      "steppedLine": true,
       "targets": [
         {
           "$$hashKey": "object:303",
@@ -99,6 +103,8 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:457",
+          "decimals": null,
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -107,6 +113,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:458",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -121,6 +128,104 @@
       }
     },
     {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 75,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 10,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:1223",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:1224",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "$$hashKey": "object:1422",
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": "channel",
+      "repeatDirection": "h",
+      "scopedVars": {
+        "channel": {
+          "$$hashKey": "object:2303",
+          "selected": true,
+          "text": "seraphimkimiko",
+          "value": "seraphimkimiko"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "$$hashKey": "object:1070",
+          "expr": "lmhd_twitch_stream_viewers{channel=~\"$channel\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "25,50",
+      "title": "Average Viewers ($channel)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:1226",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -131,7 +236,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 21
       },
       "id": 4,
       "legend": {
@@ -184,6 +289,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:671",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -192,6 +298,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:672",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -216,7 +323,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 21
       },
       "id": 6,
       "legend": {
@@ -325,7 +432,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -356,5 +463,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 11
+  "version": 16
 }
