@@ -7,7 +7,13 @@ Proof of Concept, using (deprecated) v5 (Kraken) Twitch API
 
 ## Usage
 
-Copy `example.env` to `.env`, and modify as necessary
+Copy `example.env` to `.env`, and modify as necessary:
+
+| Variable           | What it does                                                                    |
+|--------------------|---------------------------------------------------------------------------------|
+| `LOG_LEVEL`        | Log verbosity of the exporter. Options are: debug, info, warn, error            |
+| `KRAKEN_CLIENT_ID` | Twitch API Client ID  You can get one from https://glass.twitch.tv/console/apps |
+| `TWITCH_CHANNELS`  | Comma-separated list of Twitch channels to monitor                              |
 
 ### Local
 
@@ -22,7 +28,7 @@ go run *.go
 Launch the exporter, as well as a prometheus instance with:
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 Prometheus will be available, on [http://localhost:9090](http://localhost:9090)
@@ -30,6 +36,12 @@ Prometheus will be available, on [http://localhost:9090](http://localhost:9090)
 The docker-compose file also comes with Grafana, with a pre-configured dashboard, on [http://localhost:3000](http://localhost:3000)
 
 ![screenshot of Grafana dashboard](images/grafana.png)
+
+If you want to add more channels, just modify `.env`, and reload the exporter with:
+
+```
+docker-compose up -d my_metrics
+```
 
 
 
