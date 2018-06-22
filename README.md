@@ -54,6 +54,6 @@ docker-compose up -d twitch_exporter
 
 - [X] Bundle prometheus and grafana configs up into docker images
 
-- [ ] Automate builds
+- [X] Automate builds
 
 - [ ] Run this somewhere. ECS?

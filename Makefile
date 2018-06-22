@@ -1,4 +1,4 @@
-.PHONY: build up push
+.PHONY: build up push clean
 .DEFAULT_GOAL: build
 
 
@@ -22,3 +22,10 @@ push:
 	@echo ========================================
 	
 	docker-compose push
+
+clean:
+	@echo ========================================
+	@echo Cleaning Up
+	@echo ========================================
+	
+	docker-compose rm -s -f

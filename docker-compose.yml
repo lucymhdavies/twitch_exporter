@@ -13,9 +13,7 @@ networks:
 services:
 
   prometheus:
-    build:
-      context:    .
-      dockerfile: prometheus.Dockerfile
+    build: ./prometheus
     image: lmhd/twitch_exporter_prometheus
     volumes:
       - prometheus_data:/prometheus
@@ -47,9 +45,7 @@ services:
     restart: always
 
   grafana:
-    build:
-      context:    .
-      dockerfile: grafana.Dockerfile
+    build: ./grafana
     image: lmhd/twitch_exporter_grafana
     depends_on:
       - prometheus
