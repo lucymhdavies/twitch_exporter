@@ -25,5 +25,5 @@ scrape_configs:
     scrape_interval: 5s
 
     static_configs:
-         - targets: ['my_metrics:8080']
+         - targets: ['twitch_exporter:8080']
 

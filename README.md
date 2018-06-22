@@ -40,7 +40,7 @@ The docker-compose file also comes with Grafana, with a pre-configured dashboard
 If you want to add more channels, just modify `.env`, and reload the exporter with:
 
 ```
-docker-compose up -d my_metrics
+docker-compose up -d twitch_exporter
 ```
 
 
@@ -52,6 +52,8 @@ docker-compose up -d my_metrics
   - Helix should already provide most, if not all, of the necessary functionality, so migrate to that at some point
   - https://github.com/nicklaw5/helix
 
-- [ ] Bundle prometheus and grafana configs up into docker images
+- [X] Bundle prometheus and grafana configs up into docker images
+
+- [ ] Automate builds
 
 - [ ] Run this somewhere. ECS?
