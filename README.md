@@ -33,7 +33,7 @@ docker-compose up -d
 
 Prometheus will be available, on [http://localhost:9090](http://localhost:9090)
 
-The docker-compose file also comes with Grafana, with a pre-configured dashboard, on [http://localhost:3000](http://localhost:3000)
+The docker-compose file also comes with Grafana, with a pre-configured dashboard, on [http://localhost:3000](http://localhost:3000) (username/password: admin/foobar)
 
 ![screenshot of Grafana dashboard](images/grafana.png)
 
@@ -55,5 +55,7 @@ docker-compose up -d twitch_exporter
 - [X] Bundle prometheus and grafana configs up into docker images
 
 - [X] Automate builds
+
+- [ ] Track followers for non-live channels (less frequently)
 
 - [ ] Run this somewhere. ECS?
