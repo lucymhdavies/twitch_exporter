@@ -58,4 +58,6 @@ docker-compose up -d twitch_exporter
 
 - [ ] Track followers for non-live channels (less frequently)
 
+- [ ] Track how viewers are subs, followers, regulars, first time, etc. if possible
+
 - [ ] Run this somewhere. ECS?
