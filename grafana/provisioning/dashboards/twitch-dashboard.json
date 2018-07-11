@@ -18,7 +18,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1531234618031,
+  "iteration": 1531292477783,
   "links": [],
   "panels": [
     {
@@ -145,7 +145,7 @@
         "minValue": 0,
         "show": true,
         "thresholdLabels": false,
-        "thresholdMarkers": false
+        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 9,
@@ -188,7 +188,6 @@
       "repeatDirection": "h",
       "scopedVars": {
         "channel": {
-          "$$hashKey": "object:1922",
           "selected": true,
           "text": "seraphimkimiko",
           "value": "seraphimkimiko"
@@ -238,7 +237,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 18
       },
       "id": 4,
       "legend": {
@@ -326,7 +325,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 18
       },
       "id": 6,
       "legend": {
@@ -470,5 +469,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 1
+  "version": 2
 }
