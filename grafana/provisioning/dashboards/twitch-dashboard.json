@@ -8,7 +8,9 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
         "name": "Annotations & Alerts",
+        "showIn": 0,
         "type": "dashboard"
       }
     ]
@@ -16,7 +18,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1529111818502,
+  "iteration": 1531234618031,
   "links": [],
   "panels": [
     {
@@ -186,7 +188,7 @@
       "repeatDirection": "h",
       "scopedVars": {
         "channel": {
-          "$$hashKey": "object:857",
+          "$$hashKey": "object:1922",
           "selected": true,
           "text": "seraphimkimiko",
           "value": "seraphimkimiko"
@@ -236,7 +238,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 27
       },
       "id": 4,
       "legend": {
@@ -251,14 +253,14 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -324,7 +326,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 27
       },
       "id": 6,
       "legend": {
@@ -339,7 +341,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -353,6 +355,7 @@
           "$$hashKey": "object:248",
           "expr": "lmhd_twitch_channel_followers{channel=~\"$channel\"}",
           "format": "time_series",
+          "instant": false,
           "intervalFactor": 1,
           "legendFormat": "{{channel}}",
           "refId": "A"
@@ -378,6 +381,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1033",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -386,6 +390,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1034",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -416,7 +421,7 @@
         },
         "datasource": "Prometheus",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Channel",
         "multi": true,
         "name": "channel",
@@ -434,7 +439,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -465,5 +470,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 21
+  "version": 1
 }
