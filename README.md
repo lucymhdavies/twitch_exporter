@@ -61,3 +61,8 @@ docker-compose up -d twitch_exporter
 - [ ] Track how viewers are subs, followers, regulars, first time, etc. if possible
 
 - [ ] Run this somewhere. ECS?
+
+
+
+## If you want to support me making silly things
+https://ko-fi.com/lucydavinhart
