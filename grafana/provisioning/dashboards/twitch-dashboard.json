@@ -18,7 +18,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1531292477783,
+  "iteration": 1532503810753,
   "links": [],
   "panels": [
     {
@@ -237,7 +237,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 27
       },
       "id": 4,
       "legend": {
@@ -259,7 +259,7 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -325,7 +325,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 27
       },
       "id": 6,
       "legend": {
@@ -469,5 +469,5 @@
   "timezone": "",
   "title": "Twitch Dashboard",
   "uid": "n5xfb7Hmz",
-  "version": 2
+  "version": 3
 }
