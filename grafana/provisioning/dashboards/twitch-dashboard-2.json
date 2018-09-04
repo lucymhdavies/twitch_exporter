@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:438",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -18,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1532503810753,
+  "iteration": 1536045456097,
   "links": [],
   "panels": [
     {
@@ -77,7 +76,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:303",
           "expr": "lmhd_twitch_stream_viewers{channel=~\"$channel\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -105,7 +103,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:457",
           "decimals": null,
           "format": "short",
           "label": null,
@@ -115,7 +112,92 @@
           "show": true
         },
         {
-          "$$hashKey": "object:458",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 20,
+        "x": 4,
+        "y": 9
+      },
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "lmhd_twitch_channel_followers{channel=~\"$channel\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{channel}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Followers",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -151,7 +233,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 18
       },
       "id": 10,
       "interval": null,
@@ -159,12 +241,10 @@
       "mappingType": 1,
       "mappingTypes": [
         {
-          "$$hashKey": "object:1223",
           "name": "value to text",
           "value": 1
         },
         {
-          "$$hashKey": "object:1224",
           "name": "range to text",
           "value": 2
         }
@@ -178,7 +258,6 @@
       "prefixFontSize": "50%",
       "rangeMaps": [
         {
-          "$$hashKey": "object:1422",
           "from": "null",
           "text": "N/A",
           "to": "null"
@@ -202,7 +281,6 @@
       "tableColumn": "",
       "targets": [
         {
-          "$$hashKey": "object:1070",
           "expr": "lmhd_twitch_stream_viewers{channel=~\"$channel\"}",
           "format": "time_series",
           "instant": false,
@@ -218,7 +296,6 @@
       "valueFontSize": "80%",
       "valueMaps": [
         {
-          "$$hashKey": "object:1226",
           "op": "=",
           "text": "N/A",
           "value": "null"
@@ -235,8 +312,8 @@
       "fill": 1,
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 0,
+        "w": 20,
+        "x": 4,
         "y": 27
       },
       "id": 4,
@@ -263,7 +340,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:194",
           "expr": "lmhd_twitch_channel_views{channel=~\"$channel\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -291,7 +367,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:671",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -300,96 +375,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:672",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 27
-      },
-      "id": 6,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "$$hashKey": "object:248",
-          "expr": "lmhd_twitch_channel_followers{channel=~\"$channel\"}",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "legendFormat": "{{channel}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Followers",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1033",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1034",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -404,7 +389,7 @@
       }
     }
   ],
-  "refresh": "1m",
+  "refresh": false,
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -438,8 +423,8 @@
     ]
   },
   "time": {
-    "from": "now-7d",
-    "to": "now"
+    "from": "2018-09-03T15:31:59.130Z",
+    "to": "2018-09-04T03:55:19.455Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -467,7 +452,7 @@
     ]
   },
   "timezone": "",
-  "title": "Twitch Dashboard",
-  "uid": "twitch",
-  "version": 3
+  "title": "Twitch Dashboard (Alt)",
+  "uid": "twitch_alt",
+  "version": 10
 }
