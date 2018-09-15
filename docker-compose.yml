@@ -22,8 +22,9 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
-    ports:
-      - 9090:9090
+# Uncomment this if you want to view prometheus directly
+#    ports:
+#      - 9090:9090
     networks:
       - back-tier
     restart: always
@@ -33,8 +34,9 @@ services:
       context:    .
       dockerfile: Dockerfile
     image: lmhd/twitch_exporter
-    ports:
-      - 8080:8080
+# Uncomment this if you want to view the twitch exporter directly
+#    ports:
+#      - 8080:8080
     networks:
       - back-tier
     environment:
