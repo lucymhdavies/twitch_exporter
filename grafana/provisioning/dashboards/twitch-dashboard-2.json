@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1536303041491,
+  "iteration": 1538870369522,
   "links": [],
   "panels": [
     {
@@ -314,7 +314,7 @@
         "h": 9,
         "w": 20,
         "x": 4,
-        "y": 36
+        "y": 27
       },
       "id": 4,
       "legend": {
@@ -389,7 +389,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "5s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -454,5 +454,5 @@
   "timezone": "",
   "title": "Twitch Dashboard (Alt)",
   "uid": "twitch_alt",
-  "version": 11
+  "version": 1
 }
